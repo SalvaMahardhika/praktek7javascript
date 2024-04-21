@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>milkyway
+</title>
+<style>
+    #sky {
+        background-color: #000;
+        height: 300px;
+        position: relative;
+    }
+    .star {
+        position: absolute;
+        background-color: #fff;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div id="sky"></div>
+
+<script>
+$(document).ready(function(){
+    // Fungsi untuk membuat bintang secara acak
+    function createStar() {
+        var size = Math.random() * 2;
+        var left = Math.random() * 100;
+        var top = Math.random() * 100;
+        var duration = Math.random() * 5 + 2; // Durasi perjalanan bintang
+        var opacity = Math.random(); // Opasitas acak
+
+        var star = $("<div class='star'></div>").css({
+            "left": left + "%",
+            "top": top + "%",
+            "width": size + "px",
+            "height": size + "px",
+            "opacity": opacity
+        });
+        $("#sky").append(star);
+
+        // Animasi pergerakan bintang
+        star.animate({top: "100%", left: left + "%"}, duration * 1000, "linear", function(){
+            $(this).remove(); // Hapus bintang setelah animasi selesai
+        });
+    }
+
+    // Buat bintang setiap detik
+    setInterval(createStar, 1000);
+});
+</script>
+
+</body>
+</html>

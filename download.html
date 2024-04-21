@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download </title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Mencegah scroll horizontal */
+        background-color: #f1f1f1; /* Warna latar belakang */
+    }
+    #dialog {
+        display: none;
+        padding: 20px;
+        background-color: #fff; /* Warna latar belakang dialog */
+    }
+    .ui-progressbar {
+        background-color: #ff8700; /* Warna progress bar */
+        border: none;
+    }
+    .ui-progressbar-value {
+        background-color: #ed1c24; /* Warna value progress bar */
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+
+<div id="dialog" title="Download Progress">
+    <p>Downloading...</p>
+    <div id="progressbar"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+    var progressbar = $("#progressbar");
+
+    // Membuat jendela dialog
+    $("#dialog").dialog({
+        autoOpen: false, // Tidak otomatis dibuka saat halaman dimuat
+        closeOnEscape: false, // Tidak dapat ditutup dengan tombol Escape
+        modal: true, // Membuat dialog menjadi modal
+        open: function() {
+            progressbar.progressbar({value: false});
+            var value = false;
+            var timer = setInterval(function() {
+                value++;
+                progressbar.progressbar("value", value);
+                // Jika progress sudah mencapai 100%, tutup dialog
+                if (value >= 100) {
+                    clearInterval(timer);
+                    $("#dialog").dialog("close");
+                }
+            }, 50);
+        },
+        close: function() {
+            progressbar.progressbar("destroy");
+        }
+    });
+
+    // Membuka jendela dialog saat tombol diklik
+    $("#open-dialog").on("click", function(){
+        $("#dialog").dialog("open");
+    });
+});
+</script>
+
+<button id="open-dialog">Mulai Unduh</button>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dialog</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Mencegah scroll horizontal */
+        background-color: #000; /* Warna latar belakang */
+    }
+    #dialog {
+        display: none;
+        padding: 20px;
+        background-color: #fff; /* Warna latar belakang dialog */
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+
+<div id="dialog" title="Dialog sederhana">
+    <p>Ini adalah konten dialog sederhana.</p>
+</div>
+
+<script>
+$(document).ready(function(){
+    // Membuat jendela dialog
+    $("#dialog").dialog({
+        autoOpen: false, // Tidak otomatis dibuka saat halaman dimuat
+        show: {
+            effect: "blind", // Efek animasi saat jendela terbuka
+            duration: 1000 // Durasi animasi dalam milidetik
+        },
+        hide: {
+            effect: "explode", // Efek animasi saat jendela tertutup
+            duration: 1000 // Durasi animasi dalam milidetik
+        }
+    });
+
+    // Membuka jendela dialog saat tombol diklik
+    $("#open-dialog").on("click", function(){
+        $("#dialog").dialog("open");
+    });
+});
+</script>
+
+<button id="open-dialog">Buka Jendela Dialog</button>
+
+</body>
+</html>
